@@ -1,4 +1,4 @@
-// Package vader implements the vader sentiment analysis algorithm
+// Package govader implements the vader sentiment analysis algorithm
 // see https://github.com/cjhutto/vaderSentiment
 package govader
 
