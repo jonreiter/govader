@@ -5,6 +5,8 @@ package govader
 import (
 	"math"
 	"strings"
+
+	"gonum.org/v1/gonum/mat"
 )
 
 func negated(inputWords []string, includeNT bool, negateList []string) bool {
@@ -88,10 +90,10 @@ func punctuationEmphasis(text string) float64 {
 
 func amplifyEP(text string) float64 {
 	epCount := strings.Count(text, "!")
-	if epCount > 4 {
-		epCount = 4
+	if epCount > maxEP {
+		epCount = maxEP
 	}
-	epAmplifier := float64(epCount) * 0.292
+	epAmplifier := float64(epCount) * epAmplifyScale
 	return epAmplifier
 }
 
@@ -99,11 +101,11 @@ func amplifyQM(text string) float64 {
 	qmCount := strings.Count(text, "?")
 	if qmCount > 1 {
 		if qmCount <= 3 {
-			return float64(qmCount) * 0.18
+			return float64(qmCount) * qmAmplifyScale
 		}
-		return 0.96
+		return maxQM
 	}
-	return 0.0
+	return 0
 }
 
 func negationCheck(valence float64, wordsAndEmoticonsLower []string, starti, i int, negateList []string) float64 {
@@ -116,7 +118,7 @@ func negationCheck(valence float64, wordsAndEmoticonsLower []string, starti, i i
 	if starti == 1 {
 		if wordsAndEmoticonsLower[i-2] == "never" &&
 			(wordsAndEmoticonsLower[i-1] == "so" || wordsAndEmoticonsLower[i-1] == "this") {
-			newValence = valence * 1.25
+			newValence = valence * negationScale
 		} else if wordsAndEmoticonsLower[i-2] == "without" &&
 			wordsAndEmoticonsLower[i-1] == "doubt" {
 			newValence = valence
@@ -128,7 +130,7 @@ func negationCheck(valence float64, wordsAndEmoticonsLower []string, starti, i i
 		if wordsAndEmoticonsLower[i-3] == "never" &&
 			((wordsAndEmoticonsLower[i-2] == "so" || wordsAndEmoticonsLower[i-2] == "this") ||
 				(wordsAndEmoticonsLower[i-1] == "so" || wordsAndEmoticonsLower[i-1] == "this")) {
-			newValence = valence * 1.25
+			newValence = valence * negationScale
 		} else if wordsAndEmoticonsLower[i-3] == "without" &&
 			(wordsAndEmoticonsLower[i-2] == "doubt" || wordsAndEmoticonsLower[i-1] == "doubt") {
 			newValence = valence
@@ -145,14 +147,43 @@ func butCheck(wordsAndEmoticonsLower []string, sentiments []float64) []float64 {
 		bi := firstIndexOfStringInSlice(wordsAndEmoticonsLower, "but")
 		for i := range sentiments {
 			if i < bi {
-				sentiments[i] = 0.5 * sentiments[i]
+				sentiments[i] = (1 - butScale) * sentiments[i]
 			}
 			if i > bi {
-				sentiments[i] = 1.5 * sentiments[i]
+				sentiments[i] = (1 + butScale) * sentiments[i]
 			}
 		}
 	}
 	return sentiments
+}
+
+// scoreValence ...
+func scoreValence(sentiments []float64, text string) Sentiment {
+	var sentiment Sentiment
+
+	if len(sentiments) > 0 {
+		sumS := mat.Sum(mat.NewVecDense(len(sentiments), sentiments))
+		punctEmphAmplifier := punctuationEmphasis(text)
+		if sumS > 0 {
+			sumS += punctEmphAmplifier
+		} else if sumS < 0 {
+			sumS -= punctEmphAmplifier
+		}
+		sentiment.Compound = normalizeDefault(sumS)
+
+		posSum, negSum, neuCount := siftSentimentScores(sentiments)
+		if posSum > math.Abs(negSum) {
+			posSum += punctEmphAmplifier
+		} else if posSum < math.Abs(negSum) {
+			negSum -= punctEmphAmplifier
+		}
+		total := posSum + math.Abs(negSum) + float64(neuCount)
+		sentiment.Positive = math.Abs(posSum / total)
+		sentiment.Negative = math.Abs(negSum / total)
+		sentiment.Neutral = math.Abs(float64(neuCount) / total)
+	}
+
+	return sentiment
 }
 
 // eof

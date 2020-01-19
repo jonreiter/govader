@@ -16,6 +16,18 @@ const nSCALAR = -0.74
 
 const alphaDefault = 15
 
+const valenceScalarScale1 = 0.95
+const valenceScalarScale2 = 0.9
+
+const epAmplifyScale = 0.292
+const qmAmplifyScale = 0.18
+
+const maxEP = 4
+const maxQM = 0.96
+
+const negationScale = 1.25
+const butScale = 0.5
+
 // TermConstants contains the large list and dictionary constants
 type TermConstants struct {
 	NegateList        []string

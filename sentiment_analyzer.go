@@ -4,12 +4,10 @@ import (
 	"bufio"
 	"bytes"
 	"log"
-	"math"
 	"strconv"
 	"strings"
 
 	"github.com/jonreiter/govader/data"
-	"gonum.org/v1/gonum/mat"
 )
 
 const lexiconAssetName = "rawdata/vader_lexicon.txt"
@@ -106,21 +104,17 @@ func (sia *SentimentIntensityAnalyzer) PolarityScores(text string) Sentiment {
 			wordsAndEmoticonsLower[i+1] == "of" {
 			sentiments = append(sentiments, valence)
 		} else {
-			sentiments = sia.SentimentValence(valence, sentitext, item, i, sentiments)
+			sentiments = sia.sentimentValence(valence, sentitext, item, i, sentiments)
 		}
 	}
 	sentiments = butCheck(wordsAndEmoticonsLower, sentiments)
-	valenceDict := ScoreValence(sentiments, text)
+	valenceDict := scoreValence(sentiments, text)
 
 	return valenceDict
 }
 
-func lazyLowercaseSlice(orig, partial []string, i int) []string {
-	return nil
-}
-
-// SentimentValence ...
-func (sia *SentimentIntensityAnalyzer) SentimentValence(valence float64, sit *SentiText, item string, i int, sentiments []float64) []float64 {
+// sentimentValence ...
+func (sia *SentimentIntensityAnalyzer) sentimentValence(valence float64, sit *SentiText, item string, i int, sentiments []float64) []float64 {
 	isCapDiff := sit.IsCapDiff
 	wordsAndEmoticons := sit.WordsAndEmoticons
 	wordsAndEmoticonsLower := sit.WordsAndEmoticonsLower
@@ -157,10 +151,10 @@ func (sia *SentimentIntensityAnalyzer) SentimentValence(valence float64, sit *Se
 				!inStringMap(sia.Lexicon, wordsAndEmoticons[i-(startI+1)]) {
 				s := sia.Constants.scalarIncDec(wordsAndEmoticons[i-(startI+1)], wordsAndEmoticonsLower[i-(startI+1)], newValence, isCapDiff)
 				if startI == 1 && s != 0 {
-					s = s * 0.95
+					s = s * valenceScalarScale1
 				}
 				if startI == 2 && s != 0 {
-					s = s * 0.9
+					s = s * valenceScalarScale2
 				}
 				newValence = newValence + s
 				newValence = negationCheck(newValence, wordsAndEmoticonsLower, startI, i, sia.Constants.NegateList)
@@ -191,35 +185,6 @@ func (sia *SentimentIntensityAnalyzer) leastCheck(valence float64, wordsAndEmoti
 		newValence = newValence * nSCALAR
 	}
 	return newValence
-}
-
-// ScoreValence ...
-func ScoreValence(sentiments []float64, text string) Sentiment {
-	var sentiment Sentiment
-
-	if len(sentiments) > 0 {
-		sumS := mat.Sum(mat.NewVecDense(len(sentiments), sentiments))
-		punctEmphAmplifier := punctuationEmphasis(text)
-		if sumS > 0 {
-			sumS += punctEmphAmplifier
-		} else if sumS < 0 {
-			sumS -= punctEmphAmplifier
-		}
-		sentiment.Compound = normalizeDefault(sumS)
-
-		posSum, negSum, neuCount := siftSentimentScores(sentiments)
-		if posSum > math.Abs(negSum) {
-			posSum += punctEmphAmplifier
-		} else if posSum < math.Abs(negSum) {
-			negSum -= punctEmphAmplifier
-		}
-		total := posSum + math.Abs(negSum) + float64(neuCount)
-		sentiment.Positive = math.Abs(posSum / total)
-		sentiment.Negative = math.Abs(negSum / total)
-		sentiment.Neutral = math.Abs(float64(neuCount) / total)
-	}
-
-	return sentiment
 }
 
 // NewSentimentIntensityAnalyzer ...
