@@ -1,3 +1,4 @@
+// Package main provides a simple sentiment scoring example.
 package main
 
 import (
