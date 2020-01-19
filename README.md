@@ -13,13 +13,13 @@ import (
     "github.com/jonreiter/govader"
 )
 
-sentimentAnalyzer := govader.NewSentimentIntensityAnalyzer()
-sentiment := sentimentAnalyzer.PolarityScores("Usage is similar to all the other ports.")
+analyzer := govader.NewSentimentIntensityAnalyzer()
+sentiment := analyzer.PolarityScores("Usage is similar to all the other ports.")
 
-fmt.Println("Compound score:",sentiment.Compound)
-fmt.Println("Positive score:",sentiment.Positive)
-fmt.Println("Neutral score:",sentiment.Neutral)
-fmt.Println("Negative score:",sentiment.Negative)
+fmt.Println("Compound score:", sentiment.Compound)
+fmt.Println("Positive score:", sentiment.Positive)
+fmt.Println("Neutral score:", sentiment.Neutral)
+fmt.Println("Negative score:", sentiment.Negative)
 
 ```
 
