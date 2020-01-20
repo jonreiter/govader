@@ -1,16 +1,12 @@
 package govader
 
-import (
-	"strings"
-)
+import "strings"
 
 func inStringSlice(slice []string, theString string) bool {
-	for _, w := range slice {
-		if w == theString {
-			return true
-		}
+	if firstIndexOfStringInSlice(slice, theString) == -1 {
+		return false
 	}
-	return false
+	return true
 }
 
 func inStringMap(theMap map[string]float64, theString string) bool {
@@ -25,17 +21,6 @@ func inStringStringMap(theMap map[string]string, theString string) bool {
 		return true
 	}
 	return false
-}
-
-// strips only leading and trailing punctuation
-func stripPunctuationIfWord(text string) string {
-	cutset := `"!#$%&\'()*+,-./:;<=>?@[\\]^_` + "`{|}~"
-	strippedText := strings.Trim(text, cutset)
-
-	if len(strippedText) < 3 {
-		return text
-	}
-	return strippedText
 }
 
 func firstIndexOfStringInSlice(slice []string, toFind string) int {
@@ -56,22 +41,12 @@ func firstIndexOfFloatInSlice(slice []float64, toFind float64) int {
 	return -1
 }
 
-func (pr *PythonesqueRegex) allcapDifferential(words []string) bool {
-	//    Check whether just some words in the input are ALL CAPS
-	//    :param list words: The words to inspect
-	//    :returns: `True` if some but not all items in `words` are ALL CAPS
-	isDifferent := false
-	allcapWords := 0
-	for _, word := range words {
-		if pr.stringIsUpper(word) {
-			allcapWords++
-		}
+func stringSliceToLower(stringsList []string) []string {
+	newStrings := make([]string, len(stringsList))
+	for i, v := range stringsList {
+		newStrings[i] = strings.ToLower(v)
 	}
-	capDifferential := len(words) - allcapWords
-	if 0 < capDifferential && capDifferential < len(words) {
-		isDifferent = true
-	}
-	return isDifferent
+	return newStrings
 }
 
 // eof

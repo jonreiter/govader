@@ -19,7 +19,7 @@ func NewSentiText(text string, pr *PythonesqueRegex) *SentiText {
 	tokenList := strings.Split(text, " ")
 	sit.WordsAndEmoticons = make([]string, 0)
 	for _, token := range tokenList {
-		strippedToken := stripPunctuationIfWord(token)
+		strippedToken := pr.stripPunctuationIfWord(token)
 		sit.WordsAndEmoticons = append(sit.WordsAndEmoticons, strippedToken)
 	}
 	sit.WordsAndEmoticonsLower = stringSliceToLower(sit.WordsAndEmoticons)

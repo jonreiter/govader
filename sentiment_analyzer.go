@@ -86,9 +86,9 @@ func (sia *SentimentIntensityAnalyzer) PolarityScores(text string) Sentiment {
 			}
 		}
 	}
-	text = strings.TrimSpace(textNoEmoji)
+	trimmedText := strings.TrimSpace(textNoEmoji)
 
-	sentitext := NewSentiText(text, sia.Constants.Regex)
+	sentitext := NewSentiText(trimmedText, sia.Constants.Regex)
 
 	sentiments := make([]float64, 0)
 	wordsAndEmoticons := sentitext.WordsAndEmoticons
@@ -108,7 +108,7 @@ func (sia *SentimentIntensityAnalyzer) PolarityScores(text string) Sentiment {
 		}
 	}
 	sentiments = butCheck(wordsAndEmoticonsLower, sentiments)
-	valenceDict := scoreValence(sentiments, text)
+	valenceDict := scoreValence(sentiments, trimmedText)
 
 	return valenceDict
 }
