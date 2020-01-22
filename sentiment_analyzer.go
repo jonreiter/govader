@@ -120,11 +120,6 @@ func (sia *SentimentIntensityAnalyzer) sentimentValence(valence float64, sit *Se
 	wordsAndEmoticonsLower := sit.WordsAndEmoticonsLower
 	itemLower := strings.ToLower(item)
 
-	outSentiments := make([]float64, len(sentiments))
-	for i, v := range sentiments {
-		outSentiments[i] = v
-	}
-
 	newValence := valence
 
 	if inStringMap(sia.Lexicon, itemLower) {
@@ -165,8 +160,8 @@ func (sia *SentimentIntensityAnalyzer) sentimentValence(valence float64, sit *Se
 		}
 		newValence = sia.leastCheck(newValence, wordsAndEmoticons, i)
 	}
-	outSentiments = append(outSentiments, newValence)
-	return outSentiments
+	sentiments = append(sentiments, newValence)
+	return sentiments
 }
 
 func (sia *SentimentIntensityAnalyzer) leastCheck(valence float64, wordsAndEmoticonsLower []string, i int) float64 {
