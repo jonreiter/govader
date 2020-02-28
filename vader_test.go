@@ -3,7 +3,7 @@ package govader_test
 import (
 	"testing"
 
-	"github.com/jonreiter/govader"
+	"github.com/tehzwen/govader"
 	"gonum.org/v1/gonum/floats"
 )
 
