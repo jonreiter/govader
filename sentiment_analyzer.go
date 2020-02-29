@@ -124,8 +124,10 @@ func (sia *SentimentIntensityAnalyzer) sentimentValence(valence float64, sit *Se
 
 	if inStringMap(sia.Lexicon, itemLower) {
 		newValence = sia.Lexicon[itemLower]
-		if itemLower == "no" && inStringMap(sia.Lexicon, wordsAndEmoticonsLower[i+1]) {
-			newValence = 0
+		if itemLower == "no" && i+1 < len(wordsAndEmoticonsLower) {
+			if inStringMap(sia.Lexicon, wordsAndEmoticonsLower[i+1]) {
+				newValence = 0
+			}
 		}
 		if (i > 0 && wordsAndEmoticonsLower[i-1] == "no") ||
 			(i > 1 && wordsAndEmoticonsLower[i-2] == "no") ||
