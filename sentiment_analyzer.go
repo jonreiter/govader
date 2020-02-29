@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/tehzwen/govader/data"
+	"github.com/jonreiter/govader/data"
 )
 
 const lexiconAssetName = "rawdata/vader_lexicon.txt"
