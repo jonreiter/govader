@@ -4,12 +4,13 @@
 
 GoVader: Vader sentiment analysis in Go
 
-This is a port of https://github.com/cjhutto/vaderSentiment from
+This is a port of [https://github.com/cjhutto/vaderSentiment](https://github.com/cjhutto/vaderSentiment) from
 Python to Go.
 
-There are tests which check it gives the same answers as the original package. And there are docs at https://godoc.org/github.com/jonreiter/govader.
+There are tests which check it gives the same answers as the original package.
 
 Usage:
+
 ```go
 import (
     "fmt"
@@ -25,4 +26,3 @@ fmt.Println("Neutral score:", sentiment.Neutral)
 fmt.Println("Negative score:", sentiment.Negative)
 
 ```
-
