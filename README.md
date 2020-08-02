@@ -1,4 +1,7 @@
 # GoVader
+
+[![GoDoc](https://godoc.org/github.com/jonreiter/govader?status.svg)](https://godoc.org/github.com/jonreiter/govader)  [![Go Report](https://goreportcard.com/badge/github.com/jonreiter/govader)](https://goreportcard.com/badge/github.com/jonreiter/govader)
+
 GoVader: Vader sentiment analysis in Go
 
 This is a port of https://github.com/cjhutto/vaderSentiment from
