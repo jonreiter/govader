@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/jonreiter/govader"
-	"gonum.org/v1/gonum/floats"
+	"gonum.org/v1/gonum/mat"
 )
 
 type PolarityTestCase struct {
@@ -17,19 +17,9 @@ type PolarityTestCase struct {
 const matchEpsilon = 0.5e-3
 
 func scoresMatch(expectedScore, realizedScore govader.Sentiment) bool {
-	if !floats.EqualWithinAbs(expectedScore.Compound, realizedScore.Compound, matchEpsilon) {
-		return false
-	}
-	if !floats.EqualWithinAbs(expectedScore.Negative, realizedScore.Negative, matchEpsilon) {
-		return false
-	}
-	if !floats.EqualWithinAbs(expectedScore.Neutral, realizedScore.Neutral, matchEpsilon) {
-		return false
-	}
-	if !floats.EqualWithinAbs(expectedScore.Positive, realizedScore.Positive, matchEpsilon) {
-		return false
-	}
-	return true
+	eVec := mat.NewVecDense(4, []float64{expectedScore.Compound, expectedScore.Negative, expectedScore.Neutral, expectedScore.Positive})
+	rVec := mat.NewVecDense(4, []float64{realizedScore.Compound, realizedScore.Negative, realizedScore.Neutral, realizedScore.Positive})
+	return mat.EqualApprox(eVec, rVec, matchEpsilon)
 }
 
 // GetExamples returns the examples, with scores, from the reference
