@@ -31,11 +31,7 @@ func (pr *PythonesqueRegex) stringIsUpper(s string) bool {
 	if hasLower {
 		return false
 	}
-	hasUpper := pr.UpperRegex.MatchString(s)
-	if hasUpper {
-		return true
-	}
-	return false
+	return pr.UpperRegex.MatchString(s)
 }
 
 func (pr *PythonesqueRegex) stripPunctuation(text string) string {

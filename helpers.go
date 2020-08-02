@@ -3,10 +3,7 @@ package govader
 import "strings"
 
 func inStringSlice(slice []string, theString string) bool {
-	if firstIndexOfStringInSlice(slice, theString) == -1 {
-		return false
-	}
-	return true
+	return firstIndexOfStringInSlice(slice, theString) != -1
 }
 
 func inStringMap(theMap map[string]float64, theString string) bool {

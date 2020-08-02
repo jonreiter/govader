@@ -103,7 +103,7 @@ func specialCaseIdioms() map[string]float64 {
 func (tc *TermConstants) sentimentLadenIdiomsCheck(valence float64, sentiTextLower string) float64 {
 	idiomsValences := make([]float64, 0)
 	for idiom := range tc.LadenIdioms {
-		if strings.Index(sentiTextLower, idiom) != -1 {
+		if strings.Contains(sentiTextLower, idiom) {
 			thisValence := tc.LadenIdioms[idiom]
 			idiomsValences = append(idiomsValences, thisValence)
 		}
