@@ -169,7 +169,7 @@ func (sia *SentimentIntensityAnalyzer) sentimentValence(valence float64, sit *Se
 func (sia *SentimentIntensityAnalyzer) leastCheck(valence float64, wordsAndEmoticonsLower []string, i int) float64 {
 	// check for negation case using "least"
 	newValence := valence
-	if i > 0 &&
+	if i > 1 &&
 		!inStringMap(sia.Lexicon, wordsAndEmoticonsLower[i-1]) &&
 		wordsAndEmoticonsLower[i-1] == "least" {
 		if wordsAndEmoticonsLower[i-2] != "at" &&
