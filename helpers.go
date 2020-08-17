@@ -29,15 +29,6 @@ func firstIndexOfStringInSlice(slice []string, toFind string) int {
 	return -1
 }
 
-func firstIndexOfFloatInSlice(slice []float64, toFind float64) int {
-	for i, v := range slice {
-		if v == toFind {
-			return i
-		}
-	}
-	return -1
-}
-
 func stringSliceToLower(stringsList []string) []string {
 	newStrings := make([]string, len(stringsList))
 	for i, v := range stringsList {

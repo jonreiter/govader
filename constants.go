@@ -1,11 +1,5 @@
 package govader
 
-import (
-	"strings"
-
-	"gonum.org/v1/gonum/mat"
-)
-
 // (empirically derived mean sentiment intensity rating increase for booster words)
 const bINCR = 0.293
 const bDECR = -0.293
@@ -100,6 +94,8 @@ func specialCaseIdioms() map[string]float64 {
 		"yeah right": -2, "kiss of death": -1.5, "to die for": 3}
 }
 
+/*
+// this is unused in the original code, leaving here for consistency
 func (tc *TermConstants) sentimentLadenIdiomsCheck(valence float64, sentiTextLower string) float64 {
 	idiomsValences := make([]float64, 0)
 	for idiom := range tc.LadenIdioms {
@@ -114,6 +110,7 @@ func (tc *TermConstants) sentimentLadenIdiomsCheck(valence float64, sentiTextLow
 	}
 	return valence
 }
+*/
 
 func (tc *TermConstants) specialIdiomsCheck(valence float64, wordsAndEmoticonsLower []string, i int, boosterDict map[string]float64) float64 {
 	newValence := valence

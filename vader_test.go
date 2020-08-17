@@ -42,6 +42,12 @@ func GetExamples() []PolarityTestCase {
 		{Text: "Make sure you :) or :D today!", Scores: govader.Sentiment{Negative: 0.0, Neutral: 0.294, Positive: 0.706, Compound: 0.8633}},
 		{Text: "Catch utf-8 emoji such as such as 💘 and 💋 and 😁", Scores: govader.Sentiment{Negative: 0.0, Neutral: 0.746, Positive: 0.254, Compound: 0.7003}},
 		{Text: "Not bad at all", Scores: govader.Sentiment{Negative: 0.0, Neutral: 0.513, Positive: 0.487, Compound: 0.431}},
+		// from here all are additional tests to increase coverage
+		{Text: "Not GREATLY bad at all!!!!!", Scores: govader.Sentiment{Negative: 0.0, Neutral: 0.4557, Positive: 0.5442, Compound: 0.6982}},
+		{Text: "Not GREATLY bad at all??", Scores: govader.Sentiment{Negative: 0.0, Neutral: 0.5019, Positive: 0.4980, Compound: 0.6084}},
+		{Text: "Not GREATLY bad at all????", Scores: govader.Sentiment{Negative: 0.0, Neutral: 0.4667, Positive: 0.5332, Compound: 0.6777}},
+		{Text: "Not least GREATLY bad at all????", Scores: govader.Sentiment{Negative: 0.0, Neutral: 0.5225, Positive: 0.4775, Compound: 0.6777}},
+		{Text: "Not GREATLY least bad at all????", Scores: govader.Sentiment{Negative: 0.4358, Neutral: 0.5642, Positive: 0.0, Compound: -0.5944}},
 	}
 	return examples
 }

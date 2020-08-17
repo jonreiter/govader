@@ -34,11 +34,6 @@ func (pr *PythonesqueRegex) stringIsUpper(s string) bool {
 	return pr.UpperRegex.MatchString(s)
 }
 
-func (pr *PythonesqueRegex) stripPunctuation(text string) string {
-	reg := pr.PunctuationRegex
-	return reg.ReplaceAllString(text, "")
-}
-
 // strips only leading and trailing punctuation
 func (pr *PythonesqueRegex) stripPunctuationIfWord(text string) string {
 	strippedText := strings.Trim(text, pr.PunctuationString)
