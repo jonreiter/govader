@@ -2,7 +2,7 @@
 
 [![GoDoc](https://godoc.org/github.com/jonreiter/govader?status.svg)](https://godoc.org/github.com/jonreiter/govader)
 [![Go Report](https://goreportcard.com/badge/github.com/jonreiter/govader)](https://goreportcard.com/badge/github.com/jonreiter/govader)
-[![BuildStatus](https://www.travis-ci.org/jonreiter/govader.svg?branch=master)](https://www.travis-ci.org/github/jonreiter/govader/branches)
+[![BuildStatus](https://www.travis-ci.com/jonreiter/govader.svg?branch=master)](https://www.travis-ci.com/github/jonreiter/govader/branches)
 [![codecov](https://codecov.io/gh/jonreiter/govader/branch/master/graph/badge.svg)](https://codecov.io/gh/jonreiter/govader)
 
 GoVader: Vader sentiment analysis in Go
