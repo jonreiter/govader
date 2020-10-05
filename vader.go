@@ -26,9 +26,9 @@ func negated(inputWords []string, includeNT bool, negateList []string) bool {
 	return false
 }
 
+// Normalize the score to be between -1 and 1 using an alpha that
+// approximates the max expected value
 func normalize(score, alpha float64) float64 {
-	//    Normalize the score to be between -1 and 1 using an alpha that
-	//    approximates the max expected value
 	normScore := score / math.Sqrt((score*score)+alpha)
 	if normScore < -1.0 {
 		return -1.0
@@ -42,9 +42,8 @@ func normalizeDefault(score float64) float64 {
 	return normalize(score, alphaDefault)
 }
 
+// Check if the preceding words increase, decrease, or negate/nullify the valence
 func (tc *TermConstants) scalarIncDec(word, wordLower string, valence float64, isCapDiff bool) float64 {
-	//    Check if the preceding words increase, decrease, or negate/nullify the
-	//    valence
 	scalar := 0.0
 	if inStringMap(tc.BoosterDict, wordLower) {
 		scalar = tc.BoosterDict[wordLower]
@@ -157,7 +156,6 @@ func butCheck(wordsAndEmoticonsLower []string, sentiments []float64) []float64 {
 	return sentiments
 }
 
-// scoreValence ...
 func scoreValence(sentiments []float64, text string) Sentiment {
 	var sentiment Sentiment
 

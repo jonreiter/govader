@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-// SentiText ...
+// SentiText holds sentiment-relevant string-level properties of input text.
 type SentiText struct {
 	Text                   string
 	WordsAndEmoticons      []string
@@ -12,7 +12,7 @@ type SentiText struct {
 	IsCapDiff              bool
 }
 
-// NewSentiText ...
+// NewSentiText initlaizes and returns a fleshed-out SentiText.
 func NewSentiText(text string, pr *PythonesqueRegex) *SentiText {
 	var sit SentiText
 	sit.Text = text

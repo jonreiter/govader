@@ -44,10 +44,10 @@ func (pr *PythonesqueRegex) stripPunctuationIfWord(text string) string {
 	return strippedText
 }
 
+// Check whether just some words in the input are ALL CAPS
+// words: The words to inspect
+// returns: true if some but not all items in words are ALL CAPS
 func (pr *PythonesqueRegex) allcapDifferential(words []string) bool {
-	//    Check whether just some words in the input are ALL CAPS
-	//    :param list words: The words to inspect
-	//    :returns: `True` if some but not all items in `words` are ALL CAPS
 	allcapWords := 0
 	for _, word := range words {
 		if pr.stringIsUpper(word) {

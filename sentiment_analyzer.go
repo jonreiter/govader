@@ -13,7 +13,7 @@ import (
 const lexiconAssetName = "rawdata/vader_lexicon.txt"
 const emojiAssetName = "rawdata/emoji_utf8_lexicon.txt"
 
-// SentimentIntensityAnalyzer ...
+// SentimentIntensityAnalyzer computes sentiment intensity scores for sentences.
 type SentimentIntensityAnalyzer struct {
 	Lexicon   map[string]float64
 	EmojiDict map[string]string
@@ -62,10 +62,8 @@ func (sia *SentimentIntensityAnalyzer) makeEmojiDict() {
 	}
 }
 
-// PolarityScores ...
-// Return a float for sentiment strength based on the input text.
-// Positive values are positive valence, negative value are negative
-// valence.
+// PolarityScores return a float for sentiment strength based on the input text.
+// Positive values are positive valence, negative value are negative valence.
 func (sia *SentimentIntensityAnalyzer) PolarityScores(text string) Sentiment {
 	textNoEmoji := ""
 	prevSpace := true
@@ -113,7 +111,6 @@ func (sia *SentimentIntensityAnalyzer) PolarityScores(text string) Sentiment {
 	return valenceDict
 }
 
-// sentimentValence ...
 func (sia *SentimentIntensityAnalyzer) sentimentValence(valence float64, sit *SentiText, item string, i int, sentiments []float64) []float64 {
 	isCapDiff := sit.IsCapDiff
 	wordsAndEmoticons := sit.WordsAndEmoticons
@@ -166,8 +163,8 @@ func (sia *SentimentIntensityAnalyzer) sentimentValence(valence float64, sit *Se
 	return sentiments
 }
 
+// check for negation case using "least"
 func (sia *SentimentIntensityAnalyzer) leastCheck(valence float64, wordsAndEmoticonsLower []string, i int) float64 {
-	// check for negation case using "least"
 	newValence := valence
 	if i > 1 &&
 		!inStringMap(sia.Lexicon, wordsAndEmoticonsLower[i-1]) &&
@@ -184,7 +181,8 @@ func (sia *SentimentIntensityAnalyzer) leastCheck(valence float64, wordsAndEmoti
 	return newValence
 }
 
-// NewSentimentIntensityAnalyzer ...
+// NewSentimentIntensityAnalyzer constructs and initializes an analyzer for computing intensity scores
+// to sentences.
 func NewSentimentIntensityAnalyzer() *SentimentIntensityAnalyzer {
 	var sia SentimentIntensityAnalyzer
 	sia.makeLexDict()
