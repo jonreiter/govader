@@ -24,8 +24,8 @@ func NewPythonesqueRegex() *PythonesqueRegex {
 	return &pr
 }
 
-// this needs to implement pythons toupper
-// only the presence of a lowercase character flips it to false
+// This implements pythons toupper.
+// Only the presence of a lowercase character flips it to false
 func (pr *PythonesqueRegex) stringIsUpper(s string) bool {
 	hasLower := pr.LowerRegex.MatchString(s)
 	if hasLower {
@@ -34,7 +34,7 @@ func (pr *PythonesqueRegex) stringIsUpper(s string) bool {
 	return pr.UpperRegex.MatchString(s)
 }
 
-// strips only leading and trailing punctuation
+// Strips only leading and trailing punctuation.
 func (pr *PythonesqueRegex) stripPunctuationIfWord(text string) string {
 	strippedText := strings.Trim(text, pr.PunctuationString)
 

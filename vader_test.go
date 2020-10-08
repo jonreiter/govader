@@ -42,7 +42,7 @@ func GetExamples() []PolarityTestCase {
 		{Text: "Make sure you :) or :D today!", Scores: govader.Sentiment{Negative: 0.0, Neutral: 0.294, Positive: 0.706, Compound: 0.8633}},
 		{Text: "Catch utf-8 emoji such as such as 💘 and 💋 and 😁", Scores: govader.Sentiment{Negative: 0.0, Neutral: 0.746, Positive: 0.254, Compound: 0.7003}},
 		{Text: "Not bad at all", Scores: govader.Sentiment{Negative: 0.0, Neutral: 0.513, Positive: 0.487, Compound: 0.431}},
-		// from here all are additional tests to increase coverage
+		// from here all are additional tests to increase coverage. scores are checked against original values here not against the original implementation
 		{Text: "Not GREATLY bad at all!!!!!", Scores: govader.Sentiment{Negative: 0.0, Neutral: 0.4557, Positive: 0.5442, Compound: 0.6982}},
 		{Text: "Not GREATLY bad at all??", Scores: govader.Sentiment{Negative: 0.0, Neutral: 0.5019, Positive: 0.4980, Compound: 0.6084}},
 		{Text: "Not GREATLY bad at all????", Scores: govader.Sentiment{Negative: 0.0, Neutral: 0.4667, Positive: 0.5332, Compound: 0.6777}},
@@ -53,6 +53,8 @@ func GetExamples() []PolarityTestCase {
 		{Text: "No not GREATLY least bad at all????", Scores: govader.Sentiment{Negative: 0.5480, Neutral: 0.4520, Positive: 0.0, Compound: -0.7238}},
 		{Text: "The book was only kind of no good.", Scores: govader.Sentiment{Negative: 0.3813, Neutral: 0.6186, Positive: 0.0, Compound: -0.4017}},
 		{Text: "The book was only kind of bad ass good.", Scores: govader.Sentiment{Negative: 0.4618, Neutral: 0.3800, Positive: 0.1583, Compound: -0.6997}},
+		{Text: "The book was only kind of never so bad ass good.", Scores: govader.Sentiment{Negative: 0.2568, Neutral: 0.4574, Positive: 0.2859, Compound: -0.1258}},
+		{Text: "The book was only kind of without doubt bad ass good.", Scores: govader.Sentiment{Negative: 0.1943, Neutral: 0.3887, Positive: 0.4170, Compound: 0.4606}},
 	}
 	return examples
 }

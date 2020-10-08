@@ -62,7 +62,7 @@ func (sia *SentimentIntensityAnalyzer) makeEmojiDict() {
 	}
 }
 
-// PolarityScores return a float for sentiment strength based on the input text.
+// PolarityScores returns a score for sentiment strength based on the input text.
 // Positive values are positive valence, negative value are negative valence.
 func (sia *SentimentIntensityAnalyzer) PolarityScores(text string) Sentiment {
 	textNoEmoji := ""

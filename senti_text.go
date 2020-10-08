@@ -12,7 +12,7 @@ type SentiText struct {
 	IsCapDiff              bool
 }
 
-// NewSentiText initlaizes and returns a fleshed-out SentiText.
+// NewSentiText initliazes and returns a fleshed-out SentiText.
 func NewSentiText(text string, pr *PythonesqueRegex) *SentiText {
 	var sit SentiText
 	sit.Text = text
