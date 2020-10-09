@@ -6,7 +6,7 @@ import (
 )
 
 // PythonesqueRegex holds all the regex needed to replicate
-// python string manipulaton behaviors
+// python string manipulation behaviors
 type PythonesqueRegex struct {
 	LowerRegex        *regexp.Regexp
 	UpperRegex        *regexp.Regexp
