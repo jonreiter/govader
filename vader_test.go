@@ -55,6 +55,7 @@ func GetExamples() []PolarityTestCase {
 		{Text: "The book was only kind of bad ass good.", Scores: govader.Sentiment{Negative: 0.4618, Neutral: 0.3800, Positive: 0.1583, Compound: -0.6997}},
 		{Text: "The book was only kind of never so bad ass good.", Scores: govader.Sentiment{Negative: 0.2568, Neutral: 0.4574, Positive: 0.2859, Compound: -0.1258}},
 		{Text: "The book was only kind of without doubt bad ass good.", Scores: govader.Sentiment{Negative: 0.1943, Neutral: 0.3887, Positive: 0.4170, Compound: 0.4606}},
+		{Text: "The book was only kind of badn't ass good.", Scores: govader.Sentiment{Negative: 0.1963, Neutral: 0.5711, Positive: 0.2325, Compound: 0.1139}},
 	}
 	return examples
 }
