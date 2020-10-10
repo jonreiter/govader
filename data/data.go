@@ -215,9 +215,9 @@ type bintree struct {
 }
 
 var _bintree = &bintree{nil, map[string]*bintree{
-	"rawdata": &bintree{nil, map[string]*bintree{
-		"emojiUTF8Lexicon.txt": &bintree{rawdataEmojiutf8lexiconTxt, map[string]*bintree{}},
-		"vaderLexicon.txt":     &bintree{rawdataVaderlexiconTxt, map[string]*bintree{}},
+	"rawdata": {nil, map[string]*bintree{
+		"emojiUTF8Lexicon.txt": {rawdataEmojiutf8lexiconTxt, map[string]*bintree{}},
+		"vaderLexicon.txt":     {rawdataVaderlexiconTxt, map[string]*bintree{}},
 	}},
 }}
 
