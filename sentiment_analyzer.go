@@ -10,8 +10,8 @@ import (
 	"github.com/jonreiter/govader/data"
 )
 
-const lexiconAssetName = "rawdata/vader_lexicon.txt"
-const emojiAssetName = "rawdata/emoji_utf8_lexicon.txt"
+const lexiconAssetName = "rawdata/vaderLexicon.txt"
+const emojiAssetName = "rawdata/emojiUTF8Lexicon.txt"
 
 // SentimentIntensityAnalyzer computes sentiment intensity scores for sentences.
 type SentimentIntensityAnalyzer struct {
