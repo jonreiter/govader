@@ -30,3 +30,4 @@ fmt.Println("Neutral score:", sentiment.Neutral)
 fmt.Println("Negative score:", sentiment.Negative)
 
 ```
+A server wrapper is available in https://github.com/PIMPfiction/govader_backend.
