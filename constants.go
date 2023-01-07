@@ -131,14 +131,14 @@ func (tc *TermConstants) specialIdiomsCheck(valence float64, wordsAndEmoticonsLo
 	}
 
 	if len(wordsAndEmoticonsLower)-1 > i {
-		zeroone := wordsAndEmoticonsLower[i-0] + " " + wordsAndEmoticonsLower[i+1]
+		zeroone := wordsAndEmoticonsLower[i+0] + " " + wordsAndEmoticonsLower[i+1]
 		if inStringMap(tc.SpecialCaseIdioms, zeroone) {
 			newValence = tc.SpecialCaseIdioms[zeroone]
 		}
 	}
 
 	if len(wordsAndEmoticonsLower)-1 > (i + 1) {
-		zeroonetwo := wordsAndEmoticonsLower[i-0] + " " + wordsAndEmoticonsLower[i+1] + " " + wordsAndEmoticonsLower[i+2]
+		zeroonetwo := wordsAndEmoticonsLower[i+0] + " " + wordsAndEmoticonsLower[i+1] + " " + wordsAndEmoticonsLower[i+2]
 		if inStringMap(tc.SpecialCaseIdioms, zeroonetwo) {
 			newValence = tc.SpecialCaseIdioms[zeroonetwo]
 		}
