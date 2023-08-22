@@ -44,54 +44,47 @@ func NewTermConstants() *TermConstants {
 
 func negateList() []string {
 	return []string{
-		"aint", "arent", "cannot", "cant", "couldnt", "darent", "didnt", "doesnt",
-		"ain't", "aren't", "can't", "couldn't", "daren't", "didn't", "doesn't",
-		"dont", "hadnt", "hasnt", "havent", "isnt", "mightnt", "mustnt", "neither",
-		"don't", "hadn't", "hasn't", "haven't", "isn't", "mightn't", "mustn't",
-		"neednt", "needn't", "never", "none", "nope", "nor", "not", "nothing", "nowhere",
-		"oughtnt", "shant", "shouldnt", "uhuh", "wasnt", "werent",
-		"oughtn't", "shan't", "shouldn't", "uh-uh", "wasn't", "weren't",
-		"without", "wont", "wouldnt", "won't", "wouldn't", "rarely", "seldom", "despite"}
+		"nemam", "ne mogu", "ne usuđujem se", "neću", "ne može", "nije", "nisu", "možda ne",
+		"ne sme", "ne treba", "nikada", "ne", "ni", "nigde", "ne bi trebalo",
+		"uh-uh", "uhuh", "nije bilo", "ne bi", "nije bilo", "bez", "ne bih", "retko",
+		"nijedno", "nijedna", "nijedan", "ničiji"}
 }
 
 func boosterDict() map[string]float64 {
 	return map[string]float64{
-		"absolutely": bINCR, "amazingly": bINCR, "awfully": bINCR,
-		"completely": bINCR, "considerable": bINCR, "considerably": bINCR,
-		"decidedly": bINCR, "deeply": bINCR, "effing": bINCR, "enormous": bINCR, "enormously": bINCR,
-		"entirely": bINCR, "especially": bINCR, "exceptional": bINCR, "exceptionally": bINCR,
-		"extreme": bINCR, "extremely": bINCR,
-		"fabulously": bINCR, "flipping": bINCR, "flippin": bINCR, "frackin": bINCR, "fracking": bINCR,
-		"fricking": bINCR, "frickin": bINCR, "frigging": bINCR, "friggin": bINCR, "fully": bINCR,
-		"fuckin": bINCR, "fucking": bINCR, "fuggin": bINCR, "fugging": bINCR,
-		"greatly": bINCR, "hella": bINCR, "highly": bINCR, "hugely": bINCR,
-		"incredible": bINCR, "incredibly": bINCR, "intensely": bINCR,
-		"major": bINCR, "majorly": bINCR, "more": bINCR, "most": bINCR, "particularly": bINCR,
-		"purely": bINCR, "quite": bINCR, "really": bINCR, "remarkably": bINCR,
-		"so": bINCR, "substantially": bINCR,
-		"thoroughly": bINCR, "total": bINCR, "totally": bINCR, "tremendous": bINCR, "tremendously": bINCR,
-		"uber": bINCR, "unbelievably": bINCR, "unusually": bINCR, "utter": bINCR, "utterly": bINCR,
-		"very":   bINCR,
-		"almost": bDECR, "barely": bDECR, "hardly": bDECR, "just enough": bDECR,
-		"kind of": bDECR, "kinda": bDECR, "kindof": bDECR, "kind-of": bDECR,
-		"less": bDECR, "little": bDECR, "marginal": bDECR, "marginally": bDECR,
-		"occasional": bDECR, "occasionally": bDECR, "partly": bDECR,
-		"scarce": bDECR, "scarcely": bDECR, "slight": bDECR, "slightly": bDECR, "somewhat": bDECR,
-		"sort of": bDECR, "sorta": bDECR, "sortof": bDECR, "sort-of": bDECR}
+		"apsolutno": bINCR, "neverovatno": bINCR, "strahovito": bINCR,
+		"u potpunosti": bINCR, "prilično": bINCR, "znatno": bINCR,
+		"odlučno": bINCR, "duboko": bINCR, "jako": bINCR, "ogroman": bINCR, "ogromno": bINCR,
+		"potpuno": bINCR, "posebno": bINCR, "izuzetan": bINCR, "izuzetno": bINCR,
+		"ekstremno": bINCR, "vrlo": bINCR, "najviše": bINCR,
+		"fantastično": bINCR, "prokletstvo": bINCR,
+		"jebeno": bINCR, "jebeni": bINCR, "veoma": bINCR,
+		"u velikoj meri": bINCR, "visoko": bINCR, "grdno": bINCR,
+		"neverovatan": bINCR, "intenzivno": bINCR, "žestoko": bINCR, "silno": bINCR,
+		"glavni": bINCR, "uglavnom": bINCR, "više": bINCR, "većina": bINCR, "naročito": bINCR,
+		"čisto": bINCR, "zaista": bINCR, "upadljivo": bINCR,
+		"tako": bINCR, "suštinski": bINCR,
+		"temeljno": bINCR, "ukupno": bINCR, "strašno": bINCR,
+		"neobično": bINCR, "izgovoriti": bINCR,
+		"skoro": bDECR, "jedva": bDECR, "grubo": bDECR, "dovoljno": bDECR,
+		"kao": bDECR, "nekako": bDECR, "malo": bDECR,
+		"u manjem stepenu": bDECR, "mali": bDECR, "marginalni": bDECR, "marginalno": bDECR,
+		"povremen": bDECR, "povremeno": bDECR, "delimično": bDECR,
+		"oskudna": bDECR, "neznatno": bDECR, "neznatan": bDECR, "donekle": bDECR}
 }
 
 func sentimentLadenIdioms() map[string]float64 {
 	return map[string]float64{
-		"cut the mustard": 2, "hand to mouth": -2,
-		"back handed": -2, "blow smoke": -2, "blowing smoke": -2,
-		"upper hand": 1, "break a leg": 2,
-		"cooking with gas": 2, "in the black": 2, "in the red": -2,
-		"on the ball": 2, "under the weather": -2}
+		"iseći senf": 2, "ruka na usta": -2,
+		"ruke iza leđa": -2, "duvati dim": -2, "duvanje dima": -2,
+		"ruke u vis": 1, "slomi nogu": 2,
+		"kuvanje na gas": 2, "u crnom": 2, "u dugovima": -2,
+		"na lopti": 2, "u novčanoj neprilici": -2}
 }
 
 func specialCaseIdioms() map[string]float64 {
-	return map[string]float64{"the shit": 3, "the bomb": 3, "bad ass": 1.5, "badass": 1.5,
-		"yeah right": -2, "kiss of death": -1.5, "to die for": 3}
+	return map[string]float64{"sranje": 3, "bomba": 3, "seronja": 1.5,
+		"kako da ne": -2, "poljubac smrti": -1.5, "umreti za": 3}
 }
 
 /*

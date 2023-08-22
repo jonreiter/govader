@@ -3,6 +3,7 @@ package govader
 import (
 	"bufio"
 	"bytes"
+	"io/ioutil"
 	"log"
 	"strconv"
 	"strings"
@@ -30,11 +31,8 @@ type Sentiment struct {
 
 func (sia *SentimentIntensityAnalyzer) makeLexDict() {
 	sia.Lexicon = make(map[string]float64)
-	asset, err := data.Asset(lexiconAssetName)
-	if err != nil {
-		log.Panic("could not open lexicon data")
-	}
-	file := bytes.NewReader(asset)
+	textFile, _ := ioutil.ReadFile("vaderLexicon.txt")
+	file := bytes.NewReader(textFile)
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		thisRawLine := scanner.Text()
