@@ -1,6 +1,7 @@
 package govader_test
 
 import (
+	"github.com/jonreiter/govader/benchmark"
 	"testing"
 
 	"github.com/jonreiter/govader"
@@ -109,4 +110,15 @@ func BenchmarkPolarityScoresLarge(b *testing.B) {
 	}
 }
 
-// eof
+func BenchmarkFullOnTestData(b *testing.B) {
+	analyzer := govader.NewSentimentIntensityAnalyzer()
+	test_texts, err := benchmark.LoadTextsFromCSV("./benchmark/vader_test.csv", 0)
+	if err != nil {
+		b.Fatalf("Getting test texts failed: %v", err)
+	}
+	b.ResetTimer()
+	for _, text := range test_texts {
+		analyzer.PolarityScores(text)
+	}
+	b.Log(b.Elapsed())
+}

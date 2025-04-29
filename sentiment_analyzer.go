@@ -65,38 +65,42 @@ func (sia *SentimentIntensityAnalyzer) makeEmojiDict() {
 // PolarityScores returns a score for sentiment strength based on the input text.
 // Positive values are positive valence, negative value are negative valence.
 func (sia *SentimentIntensityAnalyzer) PolarityScores(text string) Sentiment {
-	textNoEmoji := ""
+	// use a byte buffer to concatenate
+	var buffer bytes.Buffer
+	// estimated size
+	buffer.Grow(len(text) * 2)
+
 	prevSpace := true
 	for _, rune := range text {
 		chr := string(rune)
-		if inStringStringMap(sia.EmojiDict, chr) {
-			description := sia.EmojiDict[chr]
+		if description, exists := sia.EmojiDict[chr]; exists {
 			if !prevSpace {
-				textNoEmoji = textNoEmoji + " "
+				buffer.WriteByte(' ')
 			}
-			textNoEmoji = textNoEmoji + description
+			buffer.WriteString(description)
 			prevSpace = false
 		} else {
-			textNoEmoji = textNoEmoji + chr
-			prevSpace = false
-			if chr == " " {
-				prevSpace = true
-			}
+			buffer.WriteString(chr)
+			prevSpace = chr == " "
 		}
 	}
-	trimmedText := strings.TrimSpace(textNoEmoji)
 
+	trimmedText := strings.TrimSpace(buffer.String())
 	sentitext := NewSentiText(trimmedText, sia.Constants.Regex)
 
-	sentiments := make([]float64, 0)
+	// Pre-allocate sentiments slice to avoid reallocations
+	wordCount := len(sentitext.WordsAndEmoticons)
+	sentiments := make([]float64, 0, wordCount)
+
 	wordsAndEmoticons := sentitext.WordsAndEmoticons
 	wordsAndEmoticonsLower := sentitext.WordsAndEmoticonsLower
+
 	for i, item := range wordsAndEmoticons {
 		valence := 0.0
 		itemLower := wordsAndEmoticonsLower[i]
 
-		// check for vader_lexicon words that may be used as modifiers or negations
-		if inStringMap(sia.Constants.BoosterDict, itemLower) {
+		// Check if in booster dictionary
+		if _, exists := sia.Constants.BoosterDict[itemLower]; exists {
 			sentiments = append(sentiments, valence)
 		} else if i < (len(wordsAndEmoticons)-1) && itemLower == "kind" &&
 			wordsAndEmoticonsLower[i+1] == "of" {
@@ -105,10 +109,9 @@ func (sia *SentimentIntensityAnalyzer) PolarityScores(text string) Sentiment {
 			sentiments = sia.sentimentValence(valence, sentitext, item, i, sentiments)
 		}
 	}
-	sentiments = butCheck(wordsAndEmoticonsLower, sentiments)
-	valenceDict := scoreValence(sentiments, trimmedText)
 
-	return valenceDict
+	sentiments = butCheck(wordsAndEmoticonsLower, sentiments)
+	return scoreValence(sentiments, trimmedText)
 }
 
 func (sia *SentimentIntensityAnalyzer) sentimentValence(valence float64, sit *SentiText, item string, i int, sentiments []float64) []float64 {
